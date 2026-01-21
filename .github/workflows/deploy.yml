@@ -2,19 +2,19 @@ name: Build and Deploy to bohr.io
 
 on:
   push:
-    branches: 
+    branches:
       - main
-  pull_request:
+  pull_request: 
     branches:
       - main
 
 jobs: 
-  build:
+  build: 
     runs-on: ubuntu-latest
 
     strategy:
-      matrix:
-        node-version: [18.x]
+      matrix: 
+        node-version: [20.x]
 
     steps:
       - name: Checkout repository
@@ -22,12 +22,12 @@ jobs:
 
       - name: Setup Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v3
-        with: 
-          node-version: ${{ matrix.node-version }}
+        with:
+          node-version:  '20.x'
           cache: 'npm'
 
       - name: Install dependencies
-        run: npm ci
+        run:  npm ci
 
       - name: Run type-check
         run: npm run type-check || true
@@ -41,7 +41,7 @@ jobs:
           NEXT_PUBLIC_API_URL: ${{ secrets.NEXT_PUBLIC_API_URL || 'http://localhost:3001' }}
 
       - name:  Verify build output
-        run: |
+        run:  |
           if [ -d ". next" ]; then
             echo "✅ Build successful - . next directory created"
           else
