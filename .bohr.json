@@ -1,0 +1,12 @@
+{
+  "buildCommand": "npm run build",
+  "devCommand": "npx next dev --port $PORT",
+  "installCommand": "npm install",
+  "publicPath": "./",
+  "deployPath": "./",
+  "env": {
+    "BOHR_WEB_ADAPTER": "1",
+    "BOHR_WEB_ADAPTER_TYPE": "nextjs",
+    "BOHR_FUNCTION_RUNTIME": "nodejs18.x"
+  }
+}
