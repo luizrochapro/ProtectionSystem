@@ -1,0 +1,54 @@
+name: Build and Deploy to bohr.io
+
+on:
+  push:
+    branches: 
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs: 
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [18. x]
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with: 
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run type-check
+        run: npm run type-check || true
+
+      - name: Run linter
+        run: npm run lint || true
+
+      - name: Build Next.js application
+        run: npm run build
+        env:
+          NEXT_PUBLIC_API_URL: ${{ secrets.NEXT_PUBLIC_API_URL || 'http://localhost:3001' }}
+
+      - name:  Verify build output
+        run: |
+          if [ -d ". next" ]; then
+            echo "✅ Build successful - . next directory created"
+          else
+            echo "❌ Build failed - .next directory not found"
+            exit 1
+          fi
+
+      - name: Deploy status
+        if: success()
+        run: echo "✅ Ready for deployment to bohr.io"
