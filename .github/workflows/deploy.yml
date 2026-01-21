@@ -42,7 +42,7 @@ jobs:
 
       - name:  Verify build output
         run:  |
-          if [ -d ". next" ]; then
+          if [ -d ".next" ]; then
             echo "✅ Build successful - . next directory created"
           else
             echo "❌ Build failed - .next directory not found"
