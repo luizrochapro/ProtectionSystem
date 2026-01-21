@@ -176,7 +176,17 @@ The application will be available at [http://localhost:3000](http://localhost:30
 
 ## Deployment
 
-This application is ready for deployment to:
+This application can be deployed to various platforms. For detailed Bohr.io deployment instructions with SSR support, see [BOHR_DEPLOY.md](./BOHR_DEPLOY.md).
+
+### Quick Deployment to Bohr.io
+
+1. Connect your GitHub repository to [Bohr.io](https://bohr.io)
+2. Configure environment variables (see [BOHR_DEPLOY.md](./BOHR_DEPLOY.md))
+3. Deploy automatically with SSR enabled
+
+### Other Platforms
+
+This application is also ready for deployment to:
 - Vercel
 - AWS Amplify
 - Netlify
